@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Intervention\Image\Facades\Image as Intervention;
+use JamesMills\LaravelTimezone\Facades\Timezone;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -24,8 +25,13 @@ class UserController extends Controller
      */
     public function index()
     {
+        //dd(geoip('94.23.64.2'));
+        //dd(Timezone::);
+        $users = User::all();
+        $users->each->append('is_online');
+
         return Inertia::render('AdminUser/Index',[
-            'users' => User::all()
+            'users' => $users
         ]);
     }
 
@@ -124,7 +130,6 @@ class UserController extends Controller
     {
         $croppedAreaPixel = $request->input('cropped_area_pixel');
         $croppedArea = $request->input('cropped_area');
-        $zoom = $request->input('zoom');
         //dd($croppedArea);
         $image = Intervention::make(Storage::disk('public')->get($request->input('image')));
 

@@ -1,7 +1,8 @@
 import {Link} from "@inertiajs/react";
 import DeleteModal from "@/Components/AdminUser/DeleteModal";
+import Avatar from "@/Components/Shared/Avatar";
 
-export default function Index({users}) {
+export default function Table({auth, users}) {
     function displayDate(date) {
         return new Date(date).toLocaleDateString()
     }
@@ -10,16 +11,7 @@ export default function Index({users}) {
             <tr key={i}>
                 <td>{user.id}</td>
                 <td>
-                    {!user.avatar && (<div tabIndex={0} className="avatar w-20 text-white online placeholder cursor-pointer">
-                        <div className="bg-neutral-focus text-neutral-content rounded-full w-20">
-                            <span className="text-xl">{Array.from(user.name)[0]}</span>
-                        </div>
-                    </div>)}
-                    {user.avatar && (<div tabIndex={0} className="avatar w-20 text-white online cursor-pointer">
-                        <div className="bg-neutral-focus text-neutral-content rounded-full w-20">
-                            <img src={'/storage/'+user.avatar} />
-                        </div>
-                    </div>)}
+                    <Avatar auth={auth} user={user}></Avatar>
                 </td>
                 <td>{user.pseudo}</td>
                 <td>{user.name}</td>

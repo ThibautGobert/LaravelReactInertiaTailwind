@@ -39,9 +39,9 @@ const ImageCropper = ({image, aspect, user}) => {
 
     return (
         <>
-            <div id={'profil-image-modal'} className="modal">
-                <div className="modal-box">
-                    <div className="relative w-[500px] h-[500px] p-5">
+            <div id={'profil-image-modal'} className="modal" >
+                <div className="modal-box w-11/12 max-w-5xl flex flex-col h-[800px]">
+                    <div className="relative flex-grow" >
                         {showCrop && image && <Cropper
                             image={'/storage/'+image}
                             crop={crop}

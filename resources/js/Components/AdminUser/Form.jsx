@@ -69,7 +69,7 @@ export default function Form({user, roles, permissions, permissionType}) {
     }
 
     const checkPermissionViaRole = (permission)=> {
-        return user.roles.find(role=> {
+        return user && user.roles.find(role=> {
             return role.permissions.find(p=> p.id === permission.id)
         })
     }
@@ -165,7 +165,7 @@ export default function Form({user, roles, permissions, permissionType}) {
                             {user && (
                                 <div className="form-control w-full mb-3">
                                     <label className="label-text" htmlFor="email">Image</label>
-                                    <input id="input-avatar" type="file" className="input input-bordered w-full" onChange={e=> handleImage(e)}/>
+                                    <input id="input-avatar" type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" onChange={e=> handleImage(e)}/>
                                 </div>
                             )}
                         </div>

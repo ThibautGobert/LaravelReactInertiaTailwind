@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('created_by')->after('remember_token')->nullable();
             $table->unsignedBigInteger('updated_by')->after('created_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->after('created_by')->nullable();
+            $table->dateTime('last_seen')->default(now());
             $table->softDeletes();
         });
     }
@@ -36,6 +37,7 @@ return new class extends Migration
             $table->dropColumn('created_by');
             $table->dropColumn('updated_by');
             $table->dropColumn('deleted_by');
+            $table->dropColumn('last_seen');
             $table->dropSoftDeletes();
         });
     }

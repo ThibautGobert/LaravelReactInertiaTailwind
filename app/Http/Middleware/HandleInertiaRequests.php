@@ -34,7 +34,7 @@ class HandleInertiaRequests extends Middleware
         $path = $request->path();
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $request->user()?->append('short_permissions'),
+                'user' => $request->user()?->append('short_permissions', 'is_online'),
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [

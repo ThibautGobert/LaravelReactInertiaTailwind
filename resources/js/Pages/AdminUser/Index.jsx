@@ -21,7 +21,7 @@ export default function Index({users, auth}) {
                         <i className="fa fa-plus"></i>
                     </Link>
                 </div>
-                <Table users={users}></Table>
+                <Table auth={auth} users={users}></Table>
             </AdminLayout>
         </>
     )
