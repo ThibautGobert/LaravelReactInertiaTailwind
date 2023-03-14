@@ -1,5 +1,6 @@
 import {Link} from "@inertiajs/react";
 import {$can} from "@/Utils/permission";
+import {__} from "@/Utils/translations";
 
 export default function Index({auth, roles}) {
     function displayDate(date) {
@@ -23,9 +24,9 @@ export default function Index({auth, roles}) {
             <table className="table table-zebra w-full">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Actions</th>
+                    <th>{__('global.id')}</th>
+                    <th>{__('global.name')}</th>
+                    <th>{__('global.actions')}</th>
                 </tr>
                 </thead>
                 <tbody>

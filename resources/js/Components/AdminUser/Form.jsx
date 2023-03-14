@@ -17,6 +17,7 @@ export default function Form({user, roles, permissions, permissionType}) {
     })
 
     const [image, setImage] = useState(null)
+    const [showCropper, setShowCropper] = useState(false)
     function submit(e) {
         e.preventDefault()
         if(user) {
@@ -40,6 +41,7 @@ export default function Form({user, roles, permissions, permissionType}) {
         }
     }
     async function handleImage(e) {
+        setShowCropper(false)
         let file = e.target.files[0];
         let formData = new FormData()
         formData.append("image", file);
@@ -50,6 +52,9 @@ export default function Form({user, roles, permissions, permissionType}) {
                 }})
             setImage(res.data.path)
             document.getElementById('profil-image-modal').classList.add('modal-open')
+            setTimeout(()=> {
+                setShowCropper(true)
+            }, 300)
         }
 
     }
@@ -122,7 +127,14 @@ export default function Form({user, roles, permissions, permissionType}) {
 
     return (
         <>
-            <ImageCropper image={image} aspect={1} user={user}></ImageCropper>
+            <ImageCropper
+                image={image}
+                aspect={1}
+                user={user}
+                showCrop={showCropper}
+                inputId="form-avatar-input"
+
+            ></ImageCropper>
             <form className="h-full" onSubmit={submit}>
                 <div className="h-full flex flex-col justify-between">
                     <div>
@@ -165,7 +177,7 @@ export default function Form({user, roles, permissions, permissionType}) {
                             {user && (
                                 <div className="form-control w-full mb-3">
                                     <label className="label-text" htmlFor="email">Image</label>
-                                    <input id="input-avatar" type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" onChange={e=> handleImage(e)}/>
+                                    <input id="form-avatar-input" type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" onChange={e=> handleImage(e)}/>
                                 </div>
                             )}
                         </div>

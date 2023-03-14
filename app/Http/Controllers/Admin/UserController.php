@@ -130,10 +130,9 @@ class UserController extends Controller
     {
         $croppedAreaPixel = $request->input('cropped_area_pixel');
         $croppedArea = $request->input('cropped_area');
-        //dd($croppedArea);
+
         $image = Intervention::make(Storage::disk('public')->get($request->input('image')));
 
-        //$image->resize($image->width() * $croppedArea['width'].'%', $image->height()*$croppedArea['height'].'%')
         $image->resize($image->width() * $croppedArea['width'].'%', $image->height()*$croppedArea['height'].'%')
             ->crop($croppedAreaPixel['width'], $croppedAreaPixel['height'], $croppedAreaPixel['x'], $croppedAreaPixel['y'])
             ->resize(300, 300)
@@ -147,6 +146,6 @@ class UserController extends Controller
 
         $user->update(['avatar' => $path]);
 
-        return redirect()->route('admin.user.edit', $user);
+        return back();
     }
 }

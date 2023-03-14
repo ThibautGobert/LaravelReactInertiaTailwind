@@ -2,10 +2,10 @@ import Cropper from 'react-easy-crop'
 import {useCallback, useEffect, useState} from "react";
 import {useForm} from "@inertiajs/react";
 
-const ImageCropper = ({image, aspect, user}) => {
+const ImageCropper = ({image, aspect, user, showCrop, inputId}) => {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [zoom, setZoom] = useState(1)
-    const [showCrop, setShowCrop] = useState(false)
+
     const { data, setData, post, processing, errors, progress } = useForm({
         cropped_area: null,
         zoom: null,
@@ -15,25 +15,16 @@ const ImageCropper = ({image, aspect, user}) => {
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         data.cropped_area = croppedArea
         data.cropped_area_pixel = croppedAreaPixels
-        //console.log(croppedArea, croppedAreaPixels, {zoom:zoom})
     }, [])
 
     function submit(e) {
         e.preventDefault()
         data.image= image
-        //data.zoom = zoom
         post(route('admin.user.crop-image', user))
         onClose()
     }
-
-    useEffect(()=> {
-        setTimeout(()=> {
-            setShowCrop(true)
-        }, 1000)
-
-    })
     function onClose() {
-        document.getElementById('input-avatar').value = null
+        document.getElementById(inputId).value = null
         document.getElementById('profil-image-modal').classList.remove('modal-open')
     }
 
@@ -54,7 +45,7 @@ const ImageCropper = ({image, aspect, user}) => {
                     </div>
                     <div className="modal-action">
                         <form onSubmit={submit}>
-                            <label onClick={onClose} htmlFor={'profil-image-modal'} className="btn btn-secondary btn-outline">
+                            <label onClick={onClose} htmlFor={'profil-image-modal'} className="btn btn-secondary btn-outline mr-2">
                                 <i className="fa fa-times mr-2"></i>Annuler
                             </label>
                             <button
@@ -70,7 +61,6 @@ const ImageCropper = ({image, aspect, user}) => {
                 </div>
             </div>
         </>
-
     )
 }
 export default ImageCropper
