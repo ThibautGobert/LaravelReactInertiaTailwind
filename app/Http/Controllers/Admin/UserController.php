@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\Permissions\PermissionType;
+use App\Events\MessageSentEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreUserRequest;
 use App\Http\Requests\Admin\User\UpdateUserRequest;
 use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -25,8 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //dd(geoip('94.23.64.2'));
-        //dd(Timezone::);
+        //Event::dispatch(new MessageSentEvent(auth()->user(), 'coucou'));
         $users = User::all();
         $users->each->append('is_online');
 
