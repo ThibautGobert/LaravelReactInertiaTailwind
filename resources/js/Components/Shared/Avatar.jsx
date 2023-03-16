@@ -2,6 +2,7 @@ import {useRef, useState} from "react";
 import axios from "axios";
 import ImageCropper from "@/Components/Shared/ImageCropper";
 import useClickOutside from "@/Hooks/useClickOutside";
+import ChatBox from "@/Components/Shared/ChatBox";
 export default function Avatar({auth, user, toggledProp}) {
     const [toggled, setToggled] = useState(toggledProp || false)
     const [showCropper, setShowCropper] = useState(false)
@@ -42,6 +43,10 @@ export default function Avatar({auth, user, toggledProp}) {
         }
     }
 
+    const handleMessageClick = ()=> {
+
+    }
+
     return (
         <div ref={wrapperRef}>
             {!user.avatar && (<div tabIndex={0} className="avatar w-20 text-white online placeholder cursor-pointer">
@@ -50,7 +55,7 @@ export default function Avatar({auth, user, toggledProp}) {
                 </div>
             </div>)}
             {user.avatar && (<div tabIndex={0} className={"avatar w-20 text-white cursor-pointer" + (user.is_online ? ' online' : ' offline')}>
-                <div onClick={()=> handleToggled()}   className="relative  text-neutral-content rounded-full w-20 overflow-hidden">
+                <div onClick={()=> handleToggled()} onMouseOver={()=>setToggled(true)} onMouseLeave={()=>setToggled(false)} className="relative  text-neutral-content rounded-full w-20 overflow-hidden">
                     <img src={'/storage/'+user.avatar} />
                     {auth.user && auth.user.id === user.id && (<div onClick={handleImageClick}
                         className={`transition text-white text-center
@@ -60,6 +65,19 @@ export default function Avatar({auth, user, toggledProp}) {
                             `}>
                         <i className="fa-solid fa-gear mt-2"></i>
                     </div>)}
+                    {auth.user && auth.user.id !== user.id &&(
+                        <>
+                            <label htmlFor={'chat-box-'+user.id}
+                                 className={`transition text-white text-center
+                                flex items-start justify-center rounded-full absolute left-2/4
+                                -translate-x-2/4 w-32 h-32 cursor-pointer bg-gray-700 ${toggled ? '-translate-y-[30px]' : ''}
+                                hover:bg-cyan-600
+                                `}>
+                                <i className="fa-solid fa-message mt-2"></i>
+                            </label>
+                            <ChatBox auth={auth} user={user}></ChatBox>
+                        </>
+                    )}
                 </div>
             </div>)}
             <ImageCropper

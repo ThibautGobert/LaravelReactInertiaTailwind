@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Broadcast;
 | used to check if an authenticated user can listen to the channel.
 |
 */
-
+/*
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
-Broadcast::channel('message.sent.{userId}', function (User $user, int $userId) {
+*/
+
+Broadcast::channel('message.received.{userId}', function ($user, int $userId) {
+    //dd($user, $userId);
     return $user->id === $userId;
 });

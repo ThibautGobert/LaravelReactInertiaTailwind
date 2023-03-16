@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -10,19 +11,21 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class MessageSentEvent implements ShouldBroadcast
+class MessageReceivedEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $user;
-    public $message;
+    public Message $message;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(User $user, string $message)
+    public function __construct($user,Message $message)
     {
+        Log::info('construct event');
         $this->user = $user;
         $this->message = $message;
     }
@@ -35,7 +38,13 @@ class MessageSentEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('message.sent.'.$this->user->id),
+            new PrivateChannel('message.received.'.$this->user->id),
         ];
+    }
+
+
+    public function broadcastAs()
+    {
+        return 'message.received';
     }
 }

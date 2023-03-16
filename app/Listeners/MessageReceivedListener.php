@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\MessageSentEvent;
+use App\Events\MessageReceivedEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class MessageSentListener
+class MessageReceivedListener
 {
     /**
      * Create the event listener.
@@ -19,7 +19,7 @@ class MessageSentListener
     /**
      * Handle the event.
      */
-    public function handle(MessageSentEvent $event): void
+    public function handle(MessageReceivedEvent $event): void
     {
         //
     }
