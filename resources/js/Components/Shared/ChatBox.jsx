@@ -1,6 +1,8 @@
 import {__} from "@/Utils/translations";
 import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import axios from "axios";
+import * as ChannelType from '../../Enums/Events/ChannelType'
+import * as EventType from '../../Enums/Events/EventType'
 
 const ChatBox = ({auth, user})=> {
     const [messages, setMessages] = useState([])
@@ -13,13 +15,13 @@ const ChatBox = ({auth, user})=> {
 
     useLayoutEffect(() => {
         console.log('stop listening')
-        window.Echo.private(`message.received.${auth.user.id}`)
-            .stopListening('.message.received')
+        window.Echo.private(ChannelType.Message+auth.user.id)
+            .stopListening(EventType.MessageReceived)
     }, [])
 
     useEffect(()=> {
-        window.Echo.private(`message.received.${auth.user.id}`)
-            .listen('.message.received', (e) => {
+        window.Echo.private(ChannelType.Message+auth.user.id)
+            .listen(EventType.MessageReceived, (e) => {
                 console.log(e)
                 console.log(...messages)
                 setMessages((messages)=> [...messages, e.message])

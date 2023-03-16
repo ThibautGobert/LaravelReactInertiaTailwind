@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Enums\Events\ChannelType;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
@@ -25,7 +26,6 @@ class MessageReceivedEvent implements ShouldBroadcast
      */
     public function __construct($user,Message $message)
     {
-        Log::info('construct event');
         $this->user = $user;
         $this->message = $message;
     }
@@ -38,13 +38,14 @@ class MessageReceivedEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('message.received.'.$this->user->id),
+            new PrivateChannel(ChannelType::Message.$this->user->id),
         ];
     }
 
-
+    /*
     public function broadcastAs()
     {
         return 'message.received';
     }
+    */
 }

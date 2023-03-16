@@ -19,7 +19,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 */
 
-Broadcast::channel('message.received.{userId}', function ($user, int $userId) {
-    //dd($user, $userId);
+Broadcast::channel(\App\Enums\Events\ChannelType::Message.'{userId}', function ($user, int $userId) {
     return $user->id === $userId;
 });

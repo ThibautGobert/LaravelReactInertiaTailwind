@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb61e05768be8ba3838691960b1411fb",
+    "content-hash": "eb03de65d418c2a713383cf224f407eb",
     "packages": [
         {
             "name": "barryvdh/laravel-translation-manager",
@@ -2578,6 +2578,64 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "modstore/laravel-enum-js",
+            "version": "1.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/modstore/laravel-enum-js.git",
+                "reference": "cda247853975b3c1aa0071e8c71a203f136d8475"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/modstore/laravel-enum-js/zipball/cda247853975b3c1aa0071e8c71a203f136d8475",
+                "reference": "cda247853975b3c1aa0071e8c71a203f136d8475",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=6.0",
+                "php": "^7.1|^8.0|^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0|^6.24|^7.6",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modstore\\LaravelEnumJs\\LaravelEnumJsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modstore\\LaravelEnumJs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Whitney",
+                    "email": "mark@priceguard.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package to generate javascript versions of your PHP enum files to be used in your js builds etc.",
+            "homepage": "https://github.com/modstore/laravel-enum-js",
+            "keywords": [
+                "laravel-enum-js",
+                "modstore"
+            ],
+            "support": {
+                "issues": "https://github.com/modstore/laravel-enum-js/issues",
+                "source": "https://github.com/modstore/laravel-enum-js/tree/1.0.9"
+            },
+            "time": "2023-01-11T20:54:30+00:00"
         },
         {
             "name": "monolog/monolog",
