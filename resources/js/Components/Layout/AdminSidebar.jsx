@@ -8,10 +8,6 @@ export default function AdminSidebar({items}) {
         return <i className={props.name}></i>
     }
 
-    useEffect(() => {
-        //console.log('mount')
-
-    })
     const MappedItems = items.map((item, i) => {
         return (
             <MenuItem key={i} active={item.active} icon={<Icon name={item.icon}/>} component={<Link href={item.href}></Link>}>

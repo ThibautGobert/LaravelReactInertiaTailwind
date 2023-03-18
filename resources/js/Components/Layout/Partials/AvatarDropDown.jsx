@@ -13,7 +13,7 @@ export default function AvatarDropDown({auth, user}) {
     }
 
     return (
-        <div onClick={handleToggled} id="avatar-dropdown" className={"dropdown dropdown-end"+ (toggled ? ' dropdown-open' : '')}>
+        <div onClick={handleToggled} id="avatar-dropdown" className={"dropdown dropdown-end mt-1"+ (toggled ? ' dropdown-open' : '')}>
             <Avatar auth={auth} user={user} toggledProp={toggled}></Avatar>
             <ul tabIndex={0} className="menu transition dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
                 <li>

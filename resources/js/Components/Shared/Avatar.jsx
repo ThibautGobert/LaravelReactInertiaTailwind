@@ -7,8 +7,8 @@ export default function Avatar({auth, user, toggledProp}) {
     const [toggled, setToggled] = useState(toggledProp || false)
     const [showCropper, setShowCropper] = useState(false)
     const [image, setImage] = useState(null)
-    const wrapperRef = useRef(null);
-    useClickOutside(wrapperRef);
+    //const wrapperRef = useRef(null);
+    //useClickOutside(wrapperRef);
 
     const handleToggled = () => {
         if(toggled) {
@@ -48,13 +48,13 @@ export default function Avatar({auth, user, toggledProp}) {
     }
 
     return (
-        <div ref={wrapperRef}>
-            {!user.avatar && (<div tabIndex={0} className="avatar w-20 text-white online placeholder cursor-pointer">
-                <div className="bg-neutral-focus text-neutral-content rounded-full w-20">
+        <>
+            {!user.avatar && (<div tabIndex={0} className="avatar w-14 text-white online placeholder cursor-pointer">
+                <div className="bg-neutral-focus text-neutral-content rounded-full w-14">
                     <span className="text-xl">{Array.from(auth.user.name)[0]}</span>
                 </div>
             </div>)}
-            {user.avatar && (<div tabIndex={0} className={"avatar w-20 text-white cursor-pointer" + (user.is_online ? ' online' : ' offline')}>
+            {user.avatar && (<div tabIndex={0} className={"avatar w-14 text-white cursor-pointer" + (user.is_online ? ' online' : ' offline')}>
                 <div onClick={()=> handleToggled()} onMouseOver={()=>setToggled(true)} onMouseLeave={()=>setToggled(false)} className="relative  text-neutral-content rounded-full w-20 overflow-hidden">
                     <img src={'/storage/'+user.avatar} />
                     {auth.user && auth.user.id === user.id && (<div onClick={handleImageClick}
@@ -88,6 +88,6 @@ export default function Avatar({auth, user, toggledProp}) {
                 inputId="avatar-input"
             ></ImageCropper>
             <input onClick={handleInputClick} onChange={handleImage} id="avatar-input" type="file" className="hidden"/>
-        </div>
+        </>
     )
 }

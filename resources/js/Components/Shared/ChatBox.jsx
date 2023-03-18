@@ -14,7 +14,6 @@ const ChatBox = ({auth, user})=> {
     }
 
     useLayoutEffect(() => {
-        console.log('stop listening')
         window.Echo.private(ChannelType.Message+auth.user.id)
             .stopListening(EventType.MessageReceived)
     }, [])
@@ -22,8 +21,6 @@ const ChatBox = ({auth, user})=> {
     useEffect(()=> {
         window.Echo.private(ChannelType.Message+auth.user.id)
             .listen(EventType.MessageReceived, (e) => {
-                console.log(e)
-                console.log(...messages)
                 setMessages((messages)=> [...messages, e.message])
             });
         const getMessages = async ()=> {
@@ -74,11 +71,15 @@ const ChatBox = ({auth, user})=> {
     return (
         <>
             <input type="checkbox" id={'chat-box-'+user.id} className="modal-toggle" />
-            <div className="modal overflow-y-auto py-10">
+            <div className="modal max-h-max overflow-y-hidden py-10 ">
                 <div className="modal-box max-h-max m-auto">
-                    <label  htmlFor={'chat-box-'+user.id} className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 className="text-lg font-bold">{__('message.chat with :user', {user: user.pseudo})}</h3>
-                    {historique}
+                    <div className="overflow-y-auto h-[500px] scrollbar-thin scrollbar-thumb-neutral scrollbar-track-base-200 pr-3" style={{scrollbarColor: 'black'}}>
+                        <label htmlFor={'chat-box-'+user.id} className="btn btn-sm btn-circle absolute right-2 top-2 z-20">✕</label>
+                        <h3 className="text-lg text-base-content">
+                            <i className="fa-solid fa-comments mr-2"></i>{__('message.chat with :user', {user: user.pseudo})}
+                        </h3>
+                        {historique}
+                    </div>
                     <textarea onClick={e=>e.stopPropagation()}
                               onChange={(e)=>setMessage(e.target.value)}
                               value={message}
