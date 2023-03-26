@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Shared;
 
 use App\Events\MessageReceivedEvent;
+use App\Events\NotificationReceivedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
@@ -21,6 +23,14 @@ class MessageController extends Controller
         ]);
 
         Event::dispatch(new MessageReceivedEvent($receiver, $message));
+        $notification = Notification::create([
+            'user_id' => $receiver->id,
+            'model_class' => Message::class,
+            'model_id' => $message->id,
+            'content' => 'Nouveau message reçu de ' . auth()->user()->pseudo,
+            'read' => false
+        ]);
+        Event::dispatch(new NotificationReceivedEvent($receiver, $notification));
 
         return response()->json(['message' => $message]);
     }

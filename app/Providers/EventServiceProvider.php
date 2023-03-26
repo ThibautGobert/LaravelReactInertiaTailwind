@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MessageReceivedEvent' => [
             'App\Listeners\MessageReceivedListener',
         ],
+        'App\Events\NotificationReceivedEvent'=> [
+            'App\Listeners\NotificationReceivedListener',
+        ],
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
@@ -28,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+
     }
 
     /**

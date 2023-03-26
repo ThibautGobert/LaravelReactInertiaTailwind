@@ -71,7 +71,7 @@ const ChatBox = ({auth, user})=> {
     return (
         <>
             <input type="checkbox" id={'chat-box-'+user.id} className="modal-toggle" />
-            <div className="modal max-h-max overflow-y-hidden py-10 ">
+            <div className="modal text-base-content max-h-max overflow-y-hidden py-10 ">
                 <div className="modal-box max-h-max m-auto">
                     <div className="overflow-y-auto h-[500px] scrollbar-thin scrollbar-thumb-neutral scrollbar-track-base-200 pr-3" style={{scrollbarColor: 'black'}}>
                         <label htmlFor={'chat-box-'+user.id} className="btn btn-sm btn-circle absolute right-2 top-2 z-20">✕</label>

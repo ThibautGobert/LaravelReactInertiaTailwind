@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Attributes\UserAttribute;
 use App\Models\Relationships\UserRelationship;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,14 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Wildside\Userstamps\Userstamps;
 
+/**
+ * Class App\Models\User
+ *
+ * @property Collection messages;
+ * @property Collection unread_messages;
+ * @property Collection user_notifications;
+ * @property Collection unread_notifications;
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes, Userstamps, UserRelationship, UserAttribute;

@@ -41,28 +41,5 @@ window.Echo.channel('message.received.1')
 
  */
 
-/*
-window.pusher = new Pusher('inertia', {
-    wsHost: window.location.hostname,
-    cluster:'inertia',
-    wsPort: 6001,
-    wssPort: 6001,
-    wsPath: '',
-    disableStats: true,
-   authEndpoint: 'http://laravel.inertia/laravel-websockets/auth',
-    auth: {
-        headers: {
-            'X-CSRF-Token': "{{ csrf_token() }}",
-            'X-App-ID': "inertia"
-        }
-    },
-    enabledTransports: ['ws', 'flash']
-});
 
-let channel = window.pusher.subscribe("message.received.1");
-channel.bind("message.received", (data) => {
-    console.log(data)
-});
-
- */
 

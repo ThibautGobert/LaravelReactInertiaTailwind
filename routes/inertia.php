@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\NotificationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -50,7 +51,10 @@ Route::middleware('inertia')->group(function () {
             Route::get('role', [RoleController::class, 'index'])->name('role.index');
             Route::get('role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
             Route::post('role/{role}/update', [RoleController::class, 'update'])->name('role.update');
+
+
         });
+        Route::post('notification/{user}/get-unread', [NotificationController::class, 'getUnread']);
     });
 
     require __DIR__.'/auth.php';

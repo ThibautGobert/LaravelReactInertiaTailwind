@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Events\ChannelType;
 use App\Models\User;
 use Illuminate\Support\Facades\Broadcast;
 
@@ -19,6 +20,9 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 */
 
-Broadcast::channel(\App\Enums\Events\ChannelType::Message.'{userId}', function ($user, int $userId) {
+Broadcast::channel(ChannelType::Message.'{userId}', function ($user, int $userId) {
+    return $user->id === $userId;
+});
+Broadcast::channel(ChannelType::Notification.'{userId}', function ($user, int $userId) {
     return $user->id === $userId;
 });
